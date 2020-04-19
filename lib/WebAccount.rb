@@ -1,12 +1,14 @@
 # WebAccount.rb
 # WebAccount
 
-# 20171223
-# 0.0.4
+# 20200408, 09, 10, 11, 12
+# 0.1.0
 
 # Description: An abstract superclass for navigating a web-based user account via Selenium.
 
 require 'selenium-webdriver'
+require 'Selenium/WebDriver/Driver/Attempt/attempt'
+require 'Selenium/WebDriver/Remote/W3C/BridgeMonkeyPatch/ConvertLocators/convert_locators'
 require 'Selenium/WebDriver/SearchContext/ElementTests'
 
 class WebAccount
@@ -36,21 +38,11 @@ class WebAccount
     username ||= self.username
     password ||= self.password
     attempts = 0
-    loop do
-      begin
-        get_login_page
-        enter_username(username)
-        enter_password(password)
-        login_page_submit_button.click
-        break
-      rescue Timeout::Error, Selenium::WebDriver::Error::UnknownError, Selenium::WebDriver::Error::NoSuchElementError => e
-        attempts += 1
-        if attempts >= 3
-          driver.quit
-          puts "Giving up after 3 attempts to #{__method__} because #{e}."
-          exit
-        end
-      end
+    driver.attempt do
+      get_login_page
+      enter_username(username)
+      enter_password(password)
+      login_page_submit_button.click
     end
     @logged_in = driver_wait.until do
       driver.element_present?(:id, @logout_button_id)
@@ -71,7 +63,7 @@ class WebAccount
     driver.quit
   end
 
-  # boolean methods
+  # predicate methods
 
   def logged_in?
     @logged_in
@@ -79,7 +71,7 @@ class WebAccount
 
   def logged_out?
     driver_wait.until do
-      driver.element_present?(:xpath, '//button[.="Log in"]')
+      driver.element_present?(:xpath, @logged_out_xpath)
     end
   end
 
