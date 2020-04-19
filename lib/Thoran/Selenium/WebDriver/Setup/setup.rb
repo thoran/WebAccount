@@ -1,8 +1,8 @@
 # Thoran/Selenium/WebDriver/Setup/setup.rb
 # Thoran::Selenium::WebDriver.setup
 
-# 20200418
-# 0.0.0
+# 20200419
+# 0.0.1
 
 # Usage:
 # 1. Binary is in the path:
@@ -24,16 +24,14 @@ module Thoran
     module WebDriver
       module Setup
 
-        module_function
-
         def setup(path_or_browser)
           if File.exist?(File.expand_path(path_or_browser.to_s))
             path = path_or_browser
-            Selenium::WebDriver.at(path)
-            Selenium::WebDriver.for(selenium_browser(path))
+            at(path)
+            ::Selenium::WebDriver.for(selenium_browser(path))
           else
             browser = path_or_browser.to_sym.downcase
-            Selenium::WebDriver.for(browser)
+            ::Selenium::WebDriver.for(browser)
           end
         end
 
@@ -63,6 +61,6 @@ end
 
 module Selenium
   module WebDriver
-    include Thoran::Selenium::WebDriver::Setup
+    extend Thoran::Selenium::WebDriver::Setup
   end
 end

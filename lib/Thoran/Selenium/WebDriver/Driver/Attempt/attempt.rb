@@ -1,8 +1,8 @@
 # Thoran/Selenium/WebDriver/Attempt/attempt.rb
 # Thoran::Selenium::WebDriver::Attempt.attempt
 
-# 20200418
-# 0.0.0
+# 20200419
+# 0.0.1
 
 # Examples:
 # 1. driver.attempt do |driver|
@@ -27,7 +27,7 @@ module Thoran
               begin
                 yield
                 break
-              rescue Timeout::Error, Selenium::WebDriver::Error::UnknownError, Selenium::WebDriver::Error::NoSuchElementError => e
+              rescue Timeout::Error, ::Selenium::WebDriver::Error::UnknownError, ::Selenium::WebDriver::Error::NoSuchElementError => e
                 attempts += 1
                 if attempts >= max_attempts
                   @driver.quit
