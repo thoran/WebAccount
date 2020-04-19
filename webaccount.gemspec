@@ -17,5 +17,5 @@ Gem::Specification.new do |spec|
   spec.files = Dir['lib/**/*.rb']
   spec.required_ruby_version = '>= 2.5'
 
-  spec.add_development_dependency('selenium-webdriver')
+  spec.add_dependency('selenium-webdriver')
 end
