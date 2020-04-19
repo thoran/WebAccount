@@ -1,18 +1,18 @@
 # WebAccount.rb
 # WebAccount
 
-# 20200417
-# 0.2.0
+# 20200418
+# 0.2.1
 
 # Description: An abstract superclass for navigating a web-based user account via Selenium.
 
 # Changes:
 # 1. + Thoran namespace.
+# 0/1
+# 2. + require 'Thoran/Selenium' instead of requiring each method individually.
 
 require 'selenium-webdriver'
-require 'Thoran/Selenium/WebDriver/Driver/Attempt/attempt'
-require 'Thoran/Selenium/WebDriver/Remote/W3C/Bridge/ConvertLocators/convert_locators'
-require 'Thoran/Selenium/WebDriver/SearchContext/ElementPresentQ/element_presentQ'
+require 'Thoran/Selenium'
 
 class WebAccount
 
