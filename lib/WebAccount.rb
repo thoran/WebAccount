@@ -1,8 +1,8 @@
 # WebAccount.rb
 # WebAccount
 
-# 20170514
-# 0.0.0
+# 20170710
+# 0.0.1
 
 # Description: An abstract superclass for navigating a web-based user account via Selenium.
 
@@ -16,12 +16,12 @@ class WebAccount
   attr_writer :user_agent_alias
 
   def initialize(
-    username:, password:,
-    login_page_url:,
-    login_page_username_field_id:, login_page_password_field_id:,
-    login_page_submit_button_id:,
-    logout_button_id:,
-    logged_out_xpath:
+    username: nil, password: nil,
+    login_page_url: nil,
+    login_page_username_field_id: nil, login_page_password_field_id: nil,
+    login_page_submit_button_id: nil,
+    logout_button_id: nil,
+    logged_out_xpath: nil
   )
     @username, @password = username, password
     @login_page_url = login_page_url
@@ -33,8 +33,8 @@ class WebAccount
 
   def login(username:, password:)
     @logged_in = false
-    username = username] || self.username
-    password = password] || self.password
+    username = username || self.username
+    password = password || self.password
     attempts = 0
     loop do
       begin
