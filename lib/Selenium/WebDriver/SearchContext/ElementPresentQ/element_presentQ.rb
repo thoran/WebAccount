@@ -1,16 +1,19 @@
-# Selenium/WebDriver/SearchContext/ElementPresent/element_presentQ.rb
-# Selenium::WebDriver::SearchContext::ElementPresent.element_present?
+# Selenium/WebDriver/SearchContext/ElementPresentQ/element_presentQ.rb
+# Selenium::WebDriver::SearchContext::ElementPresentQ.element_present?
 
-# 20200412
-# 0.1.0
+# 20200413
+# 0.2.0
 
 # Examples:
 # 1. driver.element_present?(:xpath, '//a[@id="submit"]')
 
+# Changes:
+# 1. Moved element_present?() into its own module.
+
 module Selenium
   module WebDriver
     module SearchContext
-      module ElementPresent
+      module ElementPresentQ
 
         def element_present?(selector_type, selector)
           bridge.find_element_by(selector_type, selector)
@@ -27,7 +30,7 @@ end
 module Selenium
   module WebDriver
     class Driver
-      include SearchContext::ElementPresent
+      include SearchContext::ElementPresentQ
     end
   end
 end

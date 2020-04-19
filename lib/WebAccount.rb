@@ -1,15 +1,23 @@
 # WebAccount.rb
 # WebAccount
 
-# 20200408, 09, 10, 11, 12
-# 0.1.0
+# 20200417
+# 0.1.1
 
 # Description: An abstract superclass for navigating a web-based user account via Selenium.
 
+# Changes:
+# 1. + require 'Selenium/WebDriver/Driver/Attempt/attempt', so as retries are cleaner.
+# 2. ~ login() to use attempt.
+# 3. + require 'Selenium/WebDriver/Remote/W3C/BridgeMonkeyPatch/ConvertLocators/convert_locators', so can now use driver.element_present?(:id, ...) instead of using driver.element_present?(:xpath, ...).
+# 4. ~ login() to use the monkey-patched convert_locators.
+# 0/1
+# 4. /BridgeMonkeyPatch/Bridge/ namespace change.
+
 require 'selenium-webdriver'
 require 'Selenium/WebDriver/Driver/Attempt/attempt'
-require 'Selenium/WebDriver/Remote/W3C/BridgeMonkeyPatch/ConvertLocators/convert_locators'
-require 'Selenium/WebDriver/SearchContext/ElementTests'
+require 'Selenium/WebDriver/Remote/W3C/Bridge/ConvertLocators/convert_locators'
+require 'Selenium/WebDriver/SearchContext/ElementPresentQ/element_presentQ'
 
 class WebAccount
 

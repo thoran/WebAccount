@@ -1,16 +1,19 @@
-# Selenium/WebDriver/SearchContext/ElementsPresent/elements_presentQ.rb
-# Selenium::WebDriver::SearchContext::ElementsPresent.elements_present?
+# Selenium/WebDriver/SearchContext/ElementsPresentQ/elements_presentQ.rb
+# Selenium::WebDriver::SearchContext::ElementsPresentQ.elements_present?
 
-# 20200412
-# 0.1.0
+# 20200413
+# 0.2.0
 
 # Examples:
 # 1. driver.elements_present?(:xpath, '//li[@class="item"]')
 
+# Changes:
+# 1. Moved elements_present?() into its own module.
+
 module Selenium
   module WebDriver
     module SearchContext
-      module ElementsPresent
+      module ElementsPresentQ
 
         def elements_present?(selector_type, selector)
           bridge.find_elements_by(selector_type, selector)
@@ -27,7 +30,7 @@ end
 module Selenium
   module WebDriver
     class Driver
-      include SearchContext::ElementsPresent
+      include SearchContext::ElementsPresentQ
     end
   end
 end

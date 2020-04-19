@@ -1,14 +1,14 @@
 # Selenium::WebDriver::Remote::W3C::BridgeMonkeyPatch::ConvertLocators.convert_locators
 # Selenium/WebDriver/Remote/W3C/BridgeMonkeyPatch/ConvertLocators.convert_locators
 
-# 20200412
-# 0.0.0
+# 20200417
+# 0.1.0
 
 module Selenium
   module WebDriver
     module Remote
       module W3C
-        module BridgeMonkeyPatch
+        class Bridge
           module ConvertLocators
 
             def convert_locators(how, what)
@@ -39,7 +39,7 @@ module Selenium
   module WebDriver
     module Remote
       module W3C
-        Bridge.prepend(BridgeMonkeyPatch::ConvertLocators)
+        Bridge.prepend(Bridge::ConvertLocators)
       end
     end
   end
