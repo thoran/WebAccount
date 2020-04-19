@@ -1,8 +1,8 @@
 # WebAccount.rb
 # WebAccount
 
-# 20170924
-# 0.0.2
+# 20171021
+# 0.0.3
 
 # Description: An abstract superclass for navigating a web-based user account via Selenium.
 
@@ -53,7 +53,7 @@ class WebAccount
       end
     end
     @logged_in = driver_wait.until do
-      driver.element_present?(:id, @logged_out_xpath)
+      driver.element_present?(:id, @logged_out_button_id)
     end
   end
   alias_method :logon, :login
