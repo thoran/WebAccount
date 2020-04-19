@@ -7,3 +7,5 @@
 require_relative './Selenium/WebDriver/Driver/Attempt/attempt'
 require_relative './Selenium/WebDriver/Remote/W3C/Bridge/ConvertLocators/convert_locators'
 require_relative './Selenium/WebDriver/SearchContext/ElementPresentQ/element_presentQ'
+require_relative './Selenium/WebDriver/SearchContext/ElementsPresentQ/elements_presentQ'
+require_relative './Selenium/WebDriver/Setup/setup'

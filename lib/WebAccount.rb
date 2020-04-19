@@ -1,8 +1,8 @@
 # WebAccount.rb
 # WebAccount
 
-# 20200418
-# 0.2.1
+# 20200419
+# 0.2.2
 
 # Description: An abstract superclass for navigating a web-based user account via Selenium.
 
@@ -10,6 +10,8 @@
 # 1. + Thoran namespace.
 # 0/1
 # 2. + require 'Thoran/Selenium' instead of requiring each method individually.
+# 1/2
+# 3. + Thoran::Selenium::WebDriver::Setup.setup.
 
 require 'selenium-webdriver'
 require 'Thoran/Selenium'
@@ -86,7 +88,7 @@ class WebAccount
 
   def driver
     @driver ||= (
-      driver = Selenium::WebDriver.for(user_agent_alias)
+      driver = Selenium::WebDriver.setup(user_agent_alias)
       driver.manage.timeouts.implicit_wait = 5
       driver
     )
