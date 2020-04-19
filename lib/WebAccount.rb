@@ -1,8 +1,8 @@
 # WebAccount.rb
 # WebAccount
 
-# 20170710
-# 0.0.1
+# 20170924
+# 0.0.2
 
 # Description: An abstract superclass for navigating a web-based user account via Selenium.
 
@@ -31,7 +31,7 @@ class WebAccount
     @logged_out_xpath = logged_out_xpath
   end
 
-  def login(username:, password:)
+  def login(username: nil, password: nil)
     @logged_in = false
     username = username || self.username
     password = password || self.password
