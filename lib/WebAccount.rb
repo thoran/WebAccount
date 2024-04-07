@@ -13,16 +13,16 @@ class WebAccount
   def initialize(
     username: nil, password: nil,
     login_page_url: nil,
-    login_page_username_field_id: nil, login_page_password_field_id: nil,
-    login_page_submit_button_id: nil,
-    logout_button_id: nil,
+    login_page_username_field_selector: nil, login_page_password_field_selector: nil,
+    login_page_submit_button_selector: nil,
+    logout_button_selector: nil,
     logged_out_xpath: nil
   )
     @username, @password = username, password
     @login_page_url = login_page_url
-    @login_page_username_field_id, @login_page_password_field_id = login_page_username_field_id, login_page_password_field_id
-    @login_page_submit_button_id = login_page_submit_button_id
-    @logout_button_id = logout_button_id
+    @login_page_username_field_selector, @login_page_password_field_selector = login_page_username_field_selector, login_page_password_field_selector
+    @login_page_submit_button_selector = login_page_submit_button_selector
+    @logout_button_selector = logout_button_selector
     @logged_out_xpath = logged_out_xpath
   end
 
@@ -38,13 +38,13 @@ class WebAccount
       login_page_submit_button.click
     end
     @logged_in = driver_wait.until do
-      driver.element_present?(:id, @logout_button_id)
+      driver.element_present?(@logout_button_selector.keys.first, @logout_button_selector.values.first)
     end
   end
   alias_method :logon, :login
 
   def logout
-    driver.find_element(:id, @logout_button_id).click
+    logout_button.click
     if logged_out?
       @logged_in = false
     end
@@ -98,8 +98,16 @@ class WebAccount
     username_field.send_keys(username)
   end
 
+  def default_username_field
+    {name: "username"}
+  end
+
   def username_field
-    driver.find_element(:id, @login_page_username_field_id)
+    if @login_page_username_field_selector
+      driver.find_element(@login_page_username_field_selector.keys.first, @login_page_username_field_selector.values.first)
+    else
+      driver.find_element(default_username_field.keys.first, default_username_field.values.first)
+    end
   end
 
   def enter_password(password = nil)
@@ -107,12 +115,41 @@ class WebAccount
     password_field.send_keys(password)
   end
 
+  def default_password_field
+    {name: "password"}
+  end
+
   def password_field
-    driver.find_element(:id, @login_page_password_field_id)
+    if @login_page_password_field_selector
+      driver.find_element(@login_page_password_field_selector.keys.first, @login_page_password_field_selector.values.first)
+    else
+      driver.find_element(default_password_field.keys.first, default_password_field.values.first)
+    end
+  end
+
+  def default_login_page_submit_button_selector
+    {xpath: '//input[@type="submit" and @value="Login"]'}
   end
 
   def login_page_submit_button
-    driver.find_element(:id, @login_page_submit_button_id)
+    if @login_page_submit_button_selector
+      driver.find_element(@login_page_submit_button_selector.keys.first, @login_page_submit_button_selector.values.first)
+    else
+      driver.find_element(default_login_page_submit_button_selector.keys.first, default_login_page_submit_button_selector.values.first)
+    end
   end
 
+  # logging out
+
+  def default_logout_button_selector
+    {xpath: '//input[@type="submit" and @value="Logout"]'}
+  end
+
+  def logout_button
+    if @logout_page_submit_button_selector
+      driver.find_element(@logout_button_selector.keys.first, @logout_button_selector.values.first)
+    else
+      driver.find_element(default_logout_button_selector.keys.first, default_logout_button_selector.values.first)
+    end
+  end
 end

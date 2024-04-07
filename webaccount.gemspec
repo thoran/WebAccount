@@ -4,10 +4,10 @@ Gem::Specification.new do |spec|
   spec.name = 'webaccount'
 
   spec.version = WebAccount::VERSION
-  spec.date = '2020-04-19'
+  spec.date = '2024-04-07'
 
-  spec.summary = "# Description: An abstract superclass for navigating a web-based user account via Selenium WebDriver."
-  spec.description = "Easily log into web accounts but just supplying a username and password, the URL of the login page, and a few page ids to a subclass of WebAccount."
+  spec.summary = "An abstract super-class for navigating a web-based user account via Selenium WebDriver."
+  spec.description = "Easily log into web accounts by supplying just a username and password, the URL of the login page, and a few page ids to a sub-class of WebAccount."
 
   spec.author = 'thoran'
   spec.email = 'code@thoran.com'
